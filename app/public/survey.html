@@ -18,6 +18,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <!--JQuery Link-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -32,13 +34,12 @@
                 <div class="form-group">
                     <h3 class="font-weight-bold">About You</h3>
                     <label for="exampleInputEmail1" class="font-weight-bold">Name (Required)</label>
-                    <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Name">
+                    <input type="name" class="form-control" id="name" aria-describedby="name" placeholder="Name">
 
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1" class="font-weight-bold">Link to Photo Image (Required)</label>
-                    <input type="link" class="form-control" id="exampleInputPassword1" placeholder="Image Link">
+                    <input type="link" class="form-control" id="image" placeholder="Image Link">
                 </div>
                 <hr class="my-4">
                 <div class="form-group">
@@ -213,7 +214,7 @@
                     </div>
                 </div>
             </form>
-            <button type="button" class="btn btn-primary btn-lg btn-block">Submit Survey</button>
+            <button type="submit" id="submit-button" class="btn btn-primary btn-lg btn-block">Submit Survey</button>
             <hr class="my-4">
             <a href="../data/friends.js">API Friends List |</a>
 
@@ -225,7 +226,56 @@
 
     <!--JavaScript-->
     <script type="text/javascript">
+        //When the submit button is clicked...
+        $("#submit-button").on("click", function (event) {
+            event.preventDefault();
+            //Create a new variable
+            let newFriend = {
+                name: $("#name").val().trim(),
+                image: $("#image").val().trim(),
+                scores: [
+                    $('#question1').val(),
+                    $('#question2').val(),
+                    $('#question3').val(),
+                    $('#question4').val(),
+                    $('#question5').val(),
+                    $('#question6').val(),
+                    $('#question7').val(),
+                    $('#question8').val(),
+                    $('#question9').val(),
+                    $('#question10').val(),
+                ]
+            }
+            console.log(newFriend)
+            //Send newFriend to backend
+            $.post("/api/friends", newFriend,
+                function (data) {
+                    console.log("Post newFriend Function Activated!")
+                    //If data is complete - alert
+                    if (data) {
+                        alert("You have a match!")
+                    }
+                    //If data is incomplete - alert
+                    else {
+                        alert("You did not fill out the form correctly...")
+                    }
 
+                    //Clear form
+                    console.log("Form should be cleared...")
+                    $("#name").val("");
+                    $("#image").val("");
+                    $('#question1').val("");
+                    $('#question2').val("");
+                    $('#question3').val("");
+                    $('#question4').val("");
+                    $('#question5').val("");
+                    $('#question6').val("");
+                    $('#question7').val("");
+                    $('#question8').val("");
+                    $('#question9').val("");
+                    $('#question10').val("");
+                });
+        });
     </script>
 </body>
 
