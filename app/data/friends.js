@@ -2,18 +2,35 @@ let friendsList = [
 
 {
     "name":"Ahmed",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "image":"https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
     "scores":[
-        5,
+        2,
         1,
+        3,
         4,
-        4,
-        5,
+        1,
         1,
         2,
         5,
         4,
         1
+      ]
+  },
+
+  {
+    "name":"Nick",
+    "image":"https://images-na.ssl-images-amazon.com/images/I/31d0j-cP8eL.jpg",
+    "scores":[
+        5,
+        4,
+        5,
+        4,
+        5,
+        5,
+        1,
+        4,
+        2,
+        3
       ]
   }
 ]

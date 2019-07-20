@@ -3,11 +3,6 @@ const path = require("path");
 
 module.exports = function (app) {
 
-    // //survey
-    // app.get("/api/survey.html", function (req, res) {
-    //     res.sendFile(path.join(__dirname, "./public/survey.html"))
-    // });
-
     //GET - Show survey
     app.get("/api/survey.html", function (req, res) {
         console.log("Got Survey - htmlRoutes 13")
@@ -17,6 +12,11 @@ module.exports = function (app) {
     //home
     app.get("/home.html", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/home.html"))
+    });
+
+    //Friends list
+    app.get("/data/friends.js", function (req, res) {
+        res.sendFile(path.join(__dirname, "../data/friends.js"))
     });
 
     //catch all

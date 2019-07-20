@@ -214,13 +214,31 @@
                     </div>
                 </div>
             </form>
-            <button type="submit" id="submit-button" class="btn btn-primary btn-lg btn-block">Submit Survey</button>
+            <button type="submit" id="submit-button" data-toggle="modal" data-target="#matchModal" class="btn btn-primary btn-lg btn-block">Submit Survey</button>
             <hr class="my-4">
             <a href="../data/friends.js">API Friends List |</a>
 
             <a href="https://github.com/noetinger/FriendFinder"> Github Repo</a>
         </div>
         <div class="col-md-1">
+        </div>
+        <div class="modal" id="matchModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Your New Friend!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+					<div class="modal-body">
+						<h2 id="bestFriend"></h2>
+						<img id="bestFriendImage" src="#">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -247,33 +265,42 @@
                 ]
             }
             console.log(newFriend)
+
+            var currentURL = window.location.origin;
+
             //Send newFriend to backend
-            $.post("/api/friends", newFriend,
+            $.post(currentURL + "/api/friends", newFriend,
                 function (data) {
                     console.log("Post newFriend Function Activated!")
                     //If data is complete - alert
                     if (data) {
-                        alert("You have a match!")
+                        //alert("You have a match!")
+                        //Display Best Match
+                        $("#bestFriend").text(data.name);
+                        $("#bestFriendImage").attr("src", data.image);
+                        console.log(data.image)
+                        console.log("Modal should have activated...")
+
+                        //Clear form
+                        console.log("Form should be cleared...")
+                        $("#name").val("");
+                        $("#image").val("");
+                        $('#question1').val("");
+                        $('#question2').val("");
+                        $('#question3').val("");
+                        $('#question4').val("");
+                        $('#question5').val("");
+                        $('#question6').val("");
+                        $('#question7').val("");
+                        $('#question8').val("");
+                        $('#question9').val("");
+                        $('#question10').val("");
+
                     }
                     //If data is incomplete - alert
                     else {
                         alert("You did not fill out the form correctly...")
                     }
-
-                    //Clear form
-                    console.log("Form should be cleared...")
-                    $("#name").val("");
-                    $("#image").val("");
-                    $('#question1').val("");
-                    $('#question2').val("");
-                    $('#question3').val("");
-                    $('#question4').val("");
-                    $('#question5').val("");
-                    $('#question6').val("");
-                    $('#question7').val("");
-                    $('#question8').val("");
-                    $('#question9').val("");
-                    $('#question10').val("");
                 });
         });
     </script>
